@@ -1,0 +1,16 @@
+//Property menu select style
+.custom-select:focus {
+  outline: 0;
+  border: 0;
+  box-shadow: 0 0 0 0;
+}
+
+.cat-select-design {
+  border: 1px solid #9199a7 !important;
+  font-size: 13px;
+}
+
+.hooper-track:focus,
+.hooper-list:focus {
+  outline: unset!important;
+}

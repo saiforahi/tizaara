@@ -1,0 +1,7 @@
+reCAPTCHA: 
+Site Key: 6LdghNAZAAAAAK3iA9gR8N261fMwCTge0IdadAyO
+Secret Key: 6LdghNAZAAAAAO_GULT4yH8XWMS1oLWjUU24QS0l
+
+OAuth client created
+Clint Id: 541835342636-cpkgm0vn65eev3p1b3o3hngibfsd09ul.apps.googleusercontent.com
+Clint Secret: cWgdS2gRFUdhOTyNfuG8i4SB

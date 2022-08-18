@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap");
+@import url('https://rawgit.com/lykmapipo/themify-icons/master/css/themify-icons.css');
+@import url('https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css');
+@import "node_modules/vue-select/src/scss/vue-select.scss";
+$container-max-widths: (
+        sm: 540px,
+        md: 720px,
+        lg: 960px,
+        xl: 1240px,
+        xxl: 1240px
+);
+@import 'node_modules/bootstrap/scss/bootstrap';
+
+@import "style";
+@import "scss/checkout";

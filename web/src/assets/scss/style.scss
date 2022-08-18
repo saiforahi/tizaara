@@ -1,0 +1,94 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css');
+// If you want to override variables do it here
+@import "variables";
+
+// If you want to add something do it here
+@import "custom";
+
+.modal-backdrop {
+  background-color: #000000c4!important;
+}
+
+.categorie-menu-wrapper {
+  ul {
+    li {
+      a {
+        text-decoration: none;
+        padding: 7px 15px;
+        font-size: 14px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}
+
+.text-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cursor-hand {
+  cursor: pointer !important;
+}
+
+.ck-editor__editable {
+  min-height: 300px;
+}
+
+.vs__search::placeholder {
+  color: #000000;
+  opacity: 0.5;
+}
+
+.vue-tags-input {
+  max-width: 100%;
+}
+
+.invalid_error {
+  display: none;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #392a2a;
+  box-sizing: border-box;
+}
+
+.vue-tags-input .ti-new-tag-input {
+  padding-bottom: 3px !important;
+  background: transparent;
+  color: #525b5d;
+  font-size: 14px;
+}
+
+#my-strictly-unique-vue-upload-multiple-image {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+
+.colorImage {
+  .image-container {
+    width: 100px !important;
+    height: 100px !important;
+
+    .preview-image {
+      height: 69px !important;
+    }
+
+    .image-bottom {
+      height: 20px !important;
+    }
+  }
+
+  .show-image img {
+    max-height: 70px !important;
+    max-width: 68px !important;
+  }
+}
