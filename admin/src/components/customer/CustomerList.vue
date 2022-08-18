@@ -28,6 +28,11 @@
         <div slot="name" slot-scope="props">
           {{ props.row.first_name + ' ' + props.row.last_name }}
         </div>
+        <div slot="approval" slot-scope="props">
+          <b-button v-if="props.row.status == 3" size="sm">{{$t("message.all_seller.block")}}</b-button>
+          <b-form-checkbox v-else value="2" unchecked-value="1" switch v-model="props.row.status"
+                           @change="selectApprove(props.row)"></b-form-checkbox>
+        </div>
         <div slot="options" slot-scope="props">
           <b-dropdown text="Actions" size="sm" variant="primary" class="m-md-2">
             <b-dropdown-item @click="userUpdateModalOpen(props.row)">{{ $t("message.customer_list.edit") }}
@@ -59,7 +64,7 @@ export default {
   components: {UserAddModal, UserEditModal},
   data() {
     return {
-      columns: ['serial', 'image', 'name', 'email', 'options'],
+      columns: ['serial', 'image', 'name', 'email','approval', 'options'],
       form: new Form({
         id: '',
       }),
@@ -92,6 +97,9 @@ export default {
       this.selected_user = user;
       this.$emit('change_data', 'sent data');
       this.$bvModal.show('userUpdateModal');
+    },
+    selectApprove(e) {
+      this.$store.dispatch('UPDATE_CUSTOMER_STATUS', {id: e.id, status: e.status});
     },
     deleteCustomer(id) {
       swal.fire({

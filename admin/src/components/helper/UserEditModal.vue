@@ -148,12 +148,10 @@ export default {
         maxLength: maxLength(50)
       },
       email: {
-        required,
         email,
         maxLength: maxLength(50)
       },
       mobile: {
-        required,
         maxLength: maxLength(50)
       },
       account_type:{
