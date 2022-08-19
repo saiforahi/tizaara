@@ -52,6 +52,7 @@ const mutations = {
         state.chat_conversation_types=data;
     },
     [SET_USER_TYPE](state,data) {
+        console.log('setting_user',data)
         state.user_type=data;
     },
 };

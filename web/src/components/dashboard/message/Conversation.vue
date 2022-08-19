@@ -110,8 +110,8 @@ export default {
   created() {
     $('body').addClass('open');
     this.$store.dispatch(GET_CONVERSATION_TYPE);
-    if (this.user && this.user.accoount_type ==1) this.$store.dispatch(MAKE_USER_TYPE,'supplier');
-    else if (this.user && this.user.accoount_type ==2) this.$store.dispatch(MAKE_USER_TYPE,'buyer');
+    if (this.user && this.user.account_type ==1) this.$store.dispatch(MAKE_USER_TYPE,'supplier');
+    else if (this.user && this.user.account_type ==2) this.$store.dispatch(MAKE_USER_TYPE,'buyer');
     else this.$store.dispatch(MAKE_USER_TYPE,'supplier');
   },
   methods: {
@@ -144,6 +144,7 @@ export default {
     filterConversation(){
       let chatIds = this.chat_conversation_types.map(item=>item.messageable2_id);
       /*filter for buyer or supplier switcher*/
+      console.log('convos',this.conversations_main)
       return  this.conversations_main.map(item=>{
         let lng = item.conversation.participants.filter(item2=>{
           if(item2.messageable_id != this.user.id && chatIds.includes(item2.messageable_id)) return item2;
@@ -186,6 +187,7 @@ export default {
     },
     conversations_main(){
       this.conversations=this.filterConversation();
+      console.log('convos',this.conversations)
     }
   }
 }
