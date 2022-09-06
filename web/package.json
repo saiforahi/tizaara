@@ -30,6 +30,7 @@
     "moment": "^2.29.1",
     "node-sass": "^4.14.1",
     "popper.js": "^1.16.1",
+    "shurjopay": "^0.10.3",
     "sslcommerz": "^1.6.6",
     "sweetalert2": "^9.17.1",
     "v-toaster": "^1.0.3",

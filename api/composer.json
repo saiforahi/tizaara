@@ -17,6 +17,7 @@
         "laravel/framework": "^7.24",
         "laravel/tinker": "^2.0",
         "musonza/chat": "^4.5",
+        "shurjopayv2/laravel8": "dev-master",
         "tymon/jwt-auth": "^1.0"
     },
     "require-dev": {

@@ -163,6 +163,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
         'Intervention\Image\ImageServiceProvider',
+        shurjopayv2\ShurjopayLaravelPackage8\ShurjopayServiceProvider::class,
 
         /*
          * Package Service Providers...

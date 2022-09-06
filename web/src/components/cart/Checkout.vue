@@ -461,8 +461,14 @@
                     </div>
                     <div class="custom-control custom-radio">
                       <span @click="is_cash_on_delivery=false">
-                        <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required="">
+                        <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required="" disabled>
                         <label class="custom-control-label" for="debit">SSL Commerze</label>
+                      </span>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <span @click="is_cash_on_delivery=false">
+                        <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required="">
+                        <label class="custom-control-label" for="debit">Bank / Bkash / Nagad</label>
                       </span>
                     </div>
                   </div>
@@ -520,6 +526,7 @@ import {mapGetters} from "vuex";
 import {DIVISION_LIST} from "../../core/services/store/module/division";
 import {api_base_url} from "../../core/config/app";
 import {CLEAR_CART} from "../../core/services/store/module/cart";
+
 export default {
   name: "CheckOut",
   mixins: [validationMixin],
@@ -656,6 +663,18 @@ export default {
     checkout(){
       if (this.is_cash_on_delivery) this.submit();
       else this.sslCommerze();
+    },
+    shurjopay(){
+      const sp_factory = require('shurjopay');
+      const sp = sp_factory();
+      sp.configure_merchant({
+        "mode": "sandbox",
+        "client_id": "your merchant id",
+        "client_secret": "your merchant password or secret token",
+        "client_store_id": "1",
+        "client_key_prefix": "sp",
+        "currency": "BDT"
+      })
     },
     /*
     * method for ssl commerze open
