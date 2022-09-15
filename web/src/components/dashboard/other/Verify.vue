@@ -161,13 +161,13 @@ export default {
         minLength: minLength(11),
         isUnique(value) {
           if (value === '') return true
+          if (value == this.user.mobile) return true
           if (value.length !== 11) return true
           let url = 'user/user-search?phone=' + value;
-          return ApiService.get(url)
-              .then(res => {
-                console.log(res.data)
-                return res.data == 2;
-              });
+          return ApiService.get(url).then(res => {
+            console.log(res.data)
+            return res.data == 2;
+          });
         }
       },
     }
@@ -191,6 +191,7 @@ export default {
       this.form.first_name = this.user.first_name;
       this.form.last_name = this.user.last_name;
       this.form.email = this.user.email;
+      this.form.mobile = this.user.mobile;
       this.form.account_type = this.user.account_type;
     },
     onSubmit() {
