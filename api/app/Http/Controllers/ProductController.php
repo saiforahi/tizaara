@@ -20,6 +20,7 @@ use App\SubSubCategory;
 use App\Traits\FileUpload;
 use App\Traits\Slug;
 use App\User;
+use App\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -648,7 +649,7 @@ class ProductController extends Controller
 
     public function approve($id)
     {
-        $product = Product::query()->where('id', $id)->first();
+        $product = Product::with('user')->where('id', $id)->first();
         if (!$product) {
             return response()->json(['result' => 'Error', 'message' => 'Product not found'], 404);
         }
@@ -660,8 +661,15 @@ class ProductController extends Controller
             $product->approved_by = null;
 
             $subject = $product->name . ' has been rejected';
-            $email = $product->user->email;
-            $name = $product->user->first_name . ' ' . $product->user->last_name;
+            if($product->added_by=='admin'){
+                $email = Admin::where('id',$product->user_id)->first()->email;
+                $name = Admin::where('id',$product->user_id)->first()->first_name . ' ' . Admin::where('id',$product->user_id)->first()->last_name;
+            }
+            else{
+                $email = $product->user->email;
+                $name = $product->user->first_name . ' ' . $product->user->last_name;
+            }
+            
             Mail::send('email.product_reject', ['content' => $subject],
                 function ($mail) use ($email, $name, $subject) {
                     $mail->from("rofequlislamnayem@gmail.com", "Tizaara.com");

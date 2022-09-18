@@ -24,7 +24,7 @@ class FlashDealController extends Controller
 
     public function index(Request $request)
     {
-        return DB::table('flash_deals')->select('title', 'id', 'banner', 'start_date', 'end_date', 'slug')->get();
+        return DB::table('flash_deals')->select('title','status', 'id', 'banner', 'start_date', 'end_date', 'slug')->get();
     }
 
     public function flashDealList()

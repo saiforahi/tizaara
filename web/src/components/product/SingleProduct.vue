@@ -218,7 +218,7 @@
                   {{product.user ? product.user.company_basic_info ? product.user.company_basic_info.phone : '' : '' }}
                 </a>
               </p>
-              <div class="col-md-12" >
+              <div class="col-md-12" v-if="flash_deal">
                 <button class="button button-5 button-5a icon-cart btn-custom" @click="adCart">
                   <i class="fa fa-shopping-cart"></i><span>{{ $t("message.cart_sidebar.add_to_cart") }}</span>
                 </button>

@@ -3,14 +3,12 @@
     <!-- Page Header -->
     <div class="row">
       <div class="col-12 col-sm-6 text-center text-sm-left mb-4 mb-sm-0">
-        <span class="text-uppercase page-subtitle">{{$t("message.flash.marketing")}}
-        </span>
+        <span class="text-uppercase page-subtitle">{{$t("message.flash.marketing")}}</span>
         <h3 class="page-title">{{$t("message.flash.all_flash_deals")}}</h3>
       </div>
       <div class="col-12 col-sm-6 d-flex align-items-center">
         <div class="mx-auto ml-sm-auto mr-sm-0">
-          <CButton block color="info" @click="$router.push({name: 'Flash Deals Create'})">{{$t("message.flash.create_new_flash_deal")}}
-          </CButton>
+          <CButton block color="info" @click="$router.push({name: 'Flash Deals Create'})">{{$t("message.flash.create_new_flash_deal")}}</CButton>
         </div>
       </div>
     </div><hr>
@@ -30,9 +28,7 @@
           <img v-lazy="showImage(props.row.banner)" class="border" width="80px">
         </div>
         <div slot="status" slot-scope="props">
-          <b-form-checkbox @change="e => changeStatus(e, props.row.id)" v-model="props.row.status" name="check-button"
-                           switch value="1"
-                           unchecked-value="0"></b-form-checkbox>
+          <b-form-checkbox @change="e => changeStatus(e, props.row.id)" v-model="props.row.status" name="check-button" switch value="1" unchecked-value="0"></b-form-checkbox>
         </div>
         <div slot="action" slot-scope="props">
           <CButtonGroup size="sm" class="mx-1">
