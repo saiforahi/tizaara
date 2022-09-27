@@ -87,6 +87,10 @@ export default [
                         name: 'Guest User Settings',
                         to: '/seller/guest-user-settings'
                     },
+                    {
+                        name: 'EcommerceZone Requests',
+                        to: '/seller/ecommerce-zone-requests'
+                    },
                 ]
             },
             {

@@ -10,11 +10,11 @@ use shurjopayv2\ShurjopayLaravelPackage8\Http\Controllers\ShurjopayController;
 class PaymentController extends Controller
 {
     //
-    public function shurjopay_checkout(){
+    public function shurjopay_checkout(Request $request){
         try{
             $info = array( 
                 'currency' => "BDT", 
-                'amount' => '100', 
+                'amount' => $request->query('amount'), 
                 'order_id' => "123", 
                 'discsount_amount' => null, 
                 'disc_percent' => null, 

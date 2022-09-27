@@ -11,6 +11,7 @@ export const PRODUCT_QUANTITY_CHANGE = "product/quantity/change";
 export const SET_SINGLE_PRODUCT = "setSingle/product";
 export const SET_RELATED_PRODUCT = "related/products";
 export const SET_PRODUCT_FLASH_DEAL = "flashDeal/products";
+export const SET_PRODUCT_ECOM_ZONE = "ecomZone/products";
 export const SET_PRODUCT_PRICE = "product/price";
 export const SET_AVAILABLE_PRODUCT_QTY = "product/qty/set";
 export const SET_PRODUCT_VARIANT = "product/variant/change";
@@ -22,6 +23,7 @@ const state = {
     variant:[],
     related_products:[],
     flash_deal:null,
+    ecom_zone:null,
     price:0,
     quantity:1,
     discount_price:0,
@@ -40,6 +42,9 @@ const getters = {
     },
     flash_deal(state) {
         return state.flash_deal;
+    },
+    ecom_zone(state){
+        return state.ecom_zone
     },
     price(state){
       return state.price;
@@ -132,6 +137,16 @@ const mutations = {
             }else state.flash_deal=null;
         }else state.flash_deal=null;
     },
+    [SET_PRODUCT_ECOM_ZONE](state, ecom_zone_product_list) {
+        if (ecom_zone_product_list.length>0){
+            let flash = ecom_zone_product_list.filter(item=>{
+                if (item.product_id == state.product.id) return item;
+            });
+            if (flash.length>0) {
+                state.ecom_zone = flash[flash.length - 1];
+            }else state.ecom_zone=null;
+        }else state.ecom_zone=null;
+    },
     [SET_PRODUCT_PRICE](state, price) {
         state.price=price;
     },
@@ -157,10 +172,12 @@ const mutations = {
 const actions = {
     [SINGLE_PRODUCT_DETAILS]({commit},slug) {
         ApiService.get(`single/product/information/${slug}`).then((response)=>{
+            console.log('sp',response.data)
             let data =response.data;
             commit(SET_SINGLE_PRODUCT,data.product)
             commit(SET_RELATED_PRODUCT,data.related_products)
             commit(SET_PRODUCT_FLASH_DEAL,data.product.flash_deal_products)
+            commit(SET_PRODUCT_ECOM_ZONE,data.product.ecom_zone_products)
         }).catch((error)=>{
             //
         });

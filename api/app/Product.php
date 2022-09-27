@@ -78,6 +78,10 @@ class Product extends Model
     {
         return $this->hasMany(FlashDealProduct::class);
     }
+    public function ecomZoneProducts()
+    {
+        return $this->hasMany(ProductRequest::class);
+    }
     public function productFavorites()
     {
         return $this->hasMany(ProductFavorite::class);

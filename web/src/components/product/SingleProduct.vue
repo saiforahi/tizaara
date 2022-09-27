@@ -218,8 +218,8 @@
                   {{product.user ? product.user.company_basic_info ? product.user.company_basic_info.phone : '' : '' }}
                 </a>
               </p>
-              <div class="col-md-12" v-if="flash_deal">
-                <button class="button button-5 button-5a icon-cart btn-custom" @click="adCart">
+              <div class="col-md-12" v-if="ecom_zone">
+                <button class="btn btn-outline-primary button button-5 button-5a icon-cart btn-custom" @click="adCart">
                   <i class="fa fa-shopping-cart"></i><span>{{ $t("message.cart_sidebar.add_to_cart") }}</span>
                 </button>
               </div>
@@ -782,7 +782,7 @@ export default {
     * */
     checkFavorite() {
       if (!this.isAuthenticated) return false;
-      return this.product.product_favorites.filter(item => {
+      return this.product?.product_favorites?.length>0 && this.product.product_favorites.filter(item => {
         if (item.user_id == this.user.id) return item;
       }).length > 0;
     },
@@ -921,7 +921,7 @@ export default {
   },
   computed: {
     ...mapGetters(["isAuthenticated", "user", "product", "variant",
-      "related_products", "flash_deal", "price", "discount_price", "available_product_qty",
+      "related_products", "flash_deal","ecom_zone", "price", "discount_price", "available_product_qty",
       "company_basic", "company_details", "property_options", "attribute_options", "colors",
       "color_images", "ratings", "reviews"]),
   },

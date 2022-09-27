@@ -25,6 +25,7 @@ import customer from "@/core/services/store/module/customer";
 import dashboard from "./module/dashboard";
 import subscriber from "./module/subscriber";
 import order from "./module/order";
+import ecommerce_requests from "./module/ecommerce_requests"
 
 Vue.use(Vuex)
 
@@ -87,6 +88,6 @@ export default new Vuex.Store({
         seller,
         customer,
         dashboard,
-        subscriber,order,
+        subscriber,order,ecommerce_requests
     }
 })

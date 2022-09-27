@@ -198,6 +198,12 @@ export default new Router({
                     name: "guest-user-settings",
                     component: () => import("@/components/seller/GuestUserSettings")
                 },
+                {
+                    meta: {title: 'Ecommerce Zone Requests'},
+                    path: "/seller/ecommerce-zone-requests",
+                    name: "ecommerce-zone-requests",
+                    component: () => import("@/components/seller/EcommerceRequests")
+                },
             ]
         },
         {

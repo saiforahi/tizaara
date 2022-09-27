@@ -300,6 +300,10 @@ Route::group(['middleware' => 'api'], function ($router) {
     Route::get('request-flash-deals', 'FlashDealController@requestFlashDealList');
     Route::post('product_flash_request_input', 'FlashDealController@requestFlashDealStore');
 
+    Route::get('ecom-zone-request-list', 'ProductRequestController@ecomZoneRequestList');
+    Route::post('ecom-zone-status', 'ProductRequestController@statusUpdate');
+    Route::delete('ecom-zone-request/{id}', 'ProductRequestController@destroy');
+
     Route::get('newsletter', 'NewsletterController@newsletterIndex');
     Route::post('newsletter-post', 'NewsletterController@newsletterStore');
     Route::post('subscribe', 'NewsletterController@subscribeStore');

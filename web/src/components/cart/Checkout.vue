@@ -526,6 +526,7 @@ import {mapGetters} from "vuex";
 import {DIVISION_LIST} from "../../core/services/store/module/division";
 import {api_base_url} from "../../core/config/app";
 import {CLEAR_CART} from "../../core/services/store/module/cart";
+import shurjopay from 'shurjopay'
 
 export default {
   name: "CheckOut",
@@ -628,6 +629,7 @@ export default {
     }
   },
   created() {
+    console.log(this.$route.query.order_id)
     if(this.countryList<1) this.$store.dispatch(COUNTRY_LIST);
     if(this.divisionList<1) this.$store.dispatch(DIVISION_LIST);
     if(this.cityList<1) this.$store.dispatch(CITY_LIST);
@@ -663,11 +665,13 @@ export default {
     checkout(){
       if (this.is_cash_on_delivery) this.submit();
       // else this.sslCommerze();
-      else this.shurjopay();
+      // else this.shurjopay();
+      else window.open("http://localhost:8000/shurjo?amount=100")
     },
     shurjopay(){
-      const sp_factory = require('shurjopay');
-      const sp = sp_factory();
+      // const sp_factory = require('shurjopay')();
+      console.log('sp')
+      const sp = shurjopay();
       sp.configure_merchant({
         "mode": "sandbox",
         "client_id": "your merchant id",

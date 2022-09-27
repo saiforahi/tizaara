@@ -717,6 +717,7 @@ class ProductController extends Controller
             'price_variation'=>function($q){$q->select('id','product_id','off_price','min_qty','max_qty');},
             'discount_variation_data'=>function($q){$q->select('id','product_id','min_qty','percent_off');},
             'product_stock',
+            'ecomZoneProducts'=>function($q){$q->where('status',1)->where('request_type',1);},
             'flashDealProducts'=>function($q){$q->with([
                 'flashDeal'=>function($r){$r->where('status',1)->where('start_date','<=',Carbon::today())->where('end_date','>=',Carbon::today());}
             ]);},
