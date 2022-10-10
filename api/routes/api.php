@@ -303,6 +303,7 @@ Route::group(['middleware' => 'api'], function ($router) {
     Route::get('ecom-zone-request-list', 'ProductRequestController@ecomZoneRequestList');
     Route::post('ecom-zone-status', 'ProductRequestController@statusUpdate');
     Route::delete('ecom-zone-request/{id}', 'ProductRequestController@destroy');
+    Route::get('ecom-zone-products', 'ProductRequestController@ecom_zone_products');
 
     Route::get('newsletter', 'NewsletterController@newsletterIndex');
     Route::post('newsletter-post', 'NewsletterController@newsletterStore');

@@ -4,6 +4,7 @@
     <div v-if="!loading">
       <CategoryMenu/>
       <advertisement/>
+      <EcomZone/>
       <Deal/>
       <Cat_product/>
       <Testimonial/>
@@ -18,6 +19,7 @@
 <script>
 import CategoryMenu from './home/Category_menu'
 import Deal from './home/Deal'
+import EcomZone from './home/EcomZone'
 import Brands from "@/components/home/Brands";
 import Quotation from "@/components/home/Quotation";
 import Cat_product from "@/components/home/Cat_product";
@@ -65,6 +67,7 @@ export default {
     Advertisement,
     CategoryMenu,
     Deal,
+    EcomZone,
     Brands,
     Quotation,
     Cat_product,

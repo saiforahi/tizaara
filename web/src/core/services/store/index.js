@@ -38,6 +38,7 @@ import productFavorites from "./module/productFavorites";
 import message from "./module/message";
 import dashboard from "./module/dashboard";
 import cart from "./module/cart";
+import ecom_zone_products from "./module/ecom_zone_products";
 import advertisement from "@/core/services/store/module/advertisement";
 
 Vue.use(Vuex)
@@ -68,6 +69,7 @@ export default new Vuex.Store({
         search,
         page_manage,
         help,
+        ecom_zone_products,
         flash_deals,
         testimonial,
         product_request,
