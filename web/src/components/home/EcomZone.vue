@@ -3,10 +3,14 @@
     <div class="weekly-market-wrapper">
       <div class="container">
         <div class="row">
-          <h2 class="page-title"><a href="javascript:void(0);">Ecommerce Zone</a></h2>
+          <div class="col-md-11">
+            <h2 class="page-title"><a href="javascript:void(0);">Ecommerce Zone</a></h2>
+          </div>
+          <div class="col-md-1" align="center">
+            <router-link :to="'ecom-zone'" class="btn btn-sm btn-outline-dark btn-more" style="font-size:12px; font-weight: bold;">View all</router-link>
+          </div>
         </div>
         <div class="row">
-          
           <div v-for="(item, i) in ecom_zone_products.slice(0,4)" class="col col-md-2 mb-2" :key="i">
             <div class="card-wrapper h-100">
                 <div class="card" style="cursor: pointer"  @click="productPage(item.product.slug)">
@@ -19,12 +23,6 @@
                     </p>
                   </div>
                 </div>
-            </div>
-          </div>
-          <div class="col-sm-2 mb-2">
-            <div class="custom-feature-grid weekly-deals rounded" style="min-height: 100%;">
-              <!-- <p>{{ $t("message.deal.deals_end_in") }}</p> -->
-              <router-link :to="'flash-deal/'" class="btn-more">{{ $t("message.deal.view_more") }}</router-link>
             </div>
           </div>
         </div>

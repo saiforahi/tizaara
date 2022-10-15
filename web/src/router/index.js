@@ -31,6 +31,12 @@ export default new Router({
                     component: () => import("@/components/Home")
                 },
                 {
+                    meta: {title: 'Ecom Zone | Tizaara'},
+                    path: "/ecom-zone",
+                    name: "Ecommerce Zone",
+                    component: () => import("@/components/page/EcomZoneList")
+                },
+                {
                     meta: {title: 'Flash Deal | Tizaara'},
                     path: "/flash-deal/:slug",
                     name: "Flash Deal",

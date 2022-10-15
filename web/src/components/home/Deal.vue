@@ -3,7 +3,13 @@
     <div v-for="(flash, k) in flash_dealList" class="weekly-market-wrapper" :key="k">
       <div class="container">
         <div class="row">
-          <h2 class="page-title"><a href="javascript:void(0);">{{ flash.title }}</a></h2>
+          <div class="col-md-11">
+            <h2 class="page-title"><a href="javascript:void(0);">{{ flash.title }}</a></h2>
+          </div>
+          <div class="col-md-1" align="center">
+            <router-link :to="'flash-deal/'+flash.slug" class="btn btn-sm btn-outline-dark btn-more" style="font-size:12px; font-weight: bold;">View all</router-link>
+            <!-- <button class="btn btn-sm btn-outline-dark btn-more" style="font-size:12px; font-weight: bold;">View all</button> -->
+          </div>
         </div>
         <div class="row">
           <div class="col-sm-2 mb-2">

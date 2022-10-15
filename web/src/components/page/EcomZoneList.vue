@@ -1,35 +1,36 @@
 <template>
   <div class="product-list-wrapper" style="min-height: 80vh">
-    <div class="container-fluid">
+    <!-- <div class="container-fluid">
       <div class="row" v-if="flash_details.banner">
         <img :src="showImage(flash_details.banner)" width="100%" height="100px">
       </div>
-    </div>
+    </div> -->
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
-          <h3 class="text-center my-2">{{ flash_details.title }}</h3>
-          <div class="row justify-content-center">
+          <h3 class="text-center my-2">Ecommerce Zone</h3>
+          <!-- <div class="row justify-content-center">
             <div class="weekly-deals col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2">
               <Timer
                   :starttime="new Date().getTime()"
                   :endtime="flash_details.end_date"
                   trans='{"status": {}}'></Timer>
             </div>
-          </div>
+          </div> -->
         </div>
         <div class="col-md-12 mt-5">
           <div class="item row">
-            <div v-for="(flash, i) in flash_details.flash_deal_products" class="col-6 col-sm-6 col-md-3 mb-5 box-shadow" :key="i">
+            <div v-for="(item, i) in ecom_zone_products" class="col-6 col-sm-6 col-md-3 mb-5 box-shadow"
+                 :key="i">
               <div class="card-wrapper h-100">
-                <div class="card" style="cursor: pointer"  @click="productPage(flash.product.slug)">
-                  <img class=" img-fluid zoom-in" style="padding: 5px 5px 5px 5px" v-lazy="showImage(flash.product?flash.product.thumbnail_img:'')"
+                <div class="card" style="cursor: pointer"  @click="productPage(item.product.slug)">
+                  <img class=" img-fluid zoom-in" style="padding: 5px 5px 5px 5px" v-lazy="showImage(item.product.thumbnail_img)"
                        alt="Card image cap">
                   <div class="card-body">
-                    <p class="text-center font-weight-bold pt-2" style="font-size: 12px">{{ flash.product.name }}</p>
+                    <p class="text-center font-weight-bold pt-2" style="font-size: 12px">{{ item.product.name }}</p>
                     <p>
-                      <span>{{ flash.product.currency ? flash.product.currency.symbol : '' }} {{ productPrice(flash.product) }}</span><br>
-                      <del>{{ flash.product.currency?flash.product.currency.symbol:'' }} {{ productDiscountPrice(flash.product,flash) }}</del>
+                      <span>{{ item.product.currency ? item.product.currency.symbol : '' }} {{ productPrice(item.product) }}</span><br>
+                      <del>{{ item.product.currency?item.product.currency.symbol:'' }} {{ productDiscountPrice(item.product,item) }}</del>
                     </p>
                   </div>
                 </div>
@@ -50,7 +51,7 @@ import {api_base_url} from "@/core/config/app";
 import Timer from "@/components/helper/Timer";
 
 export default {
-  name: "FlashDeal",
+  name: "EcomZoneList",
   data() {
     return {
       flash_details: [],
@@ -61,13 +62,12 @@ export default {
       return api_base_url + e;
     },
     loadFlash() {
-      if (this.flash_dealList.length > 0) {
-        let flash = this.getFlashDealBySlug(this.$route.params.slug);
-        if (flash) {
-          this.flash_details = flash;
-          console.log('flash',this.flash_details)
-        } else this.$router.push({name: "error"});
-      }
+    //   if (this.flash_dealList.length > 0) {
+    //     let flash = this.getFlashDealBySlug(this.$route.params.slug);
+    //     if (flash) {
+    //       this.flash_details = flash;
+    //     } else this.$router.push({name: "error"});
+    //   }
     },
     /*
     * method for single product page redirection
@@ -125,14 +125,14 @@ export default {
     },
   },
   created() {
-    this.flash_dealList.length < 1 ? this.$store.dispatch(FLASH_DEALS_LIST) : '';
+    this.ecom_zone_products.length < 1 ? this.$store.dispatch(FLASH_DEALS_LIST) : '';
     this.loadFlash();
   },
   computed: {
-    ...mapGetters(["flash_dealList", "getFlashDealBySlug"])
+    ...mapGetters(["ecom_zone_products", "getFlashDealBySlug"])
   },
   watch: {
-    flash_dealList() {
+    ecom_zone_products() {
       this.loadFlash();
     }
   },
