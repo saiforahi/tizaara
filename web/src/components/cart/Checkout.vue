@@ -663,44 +663,30 @@ export default {
       return $dirty ? !$error : null;
     },
     checkout(){
-      if (this.is_cash_on_delivery) this.submit();
+      this.submit();
       // else this.sslCommerze();
       // else this.shurjopay();
-      else window.open("http://localhost:8000/shurjo?amount=100")
+      // else window.open("http://localhost:8000/shurjo?amount=100&user="+this.user_id)
     },
-    shurjopay(){
-      // const sp_factory = require('shurjopay')();
-      console.log('sp')
-      const sp = shurjopay();
-      sp.configure_merchant({
-        "mode": "sandbox",
-        "client_id": "your merchant id",
-        "client_secret": "your merchant password or secret token",
-        "client_store_id": "1",
-        "client_key_prefix": "sp",
-        "currency": "BDT"
-      })
-      sp.checkout({
-          amount: '10',
-          order_id: 'sp315689',
-          customer_name: 'ATM Fahim',
-          customer_address: 'Dhaka',
-          customer_phone: '01534303074',
-          customer_city: 'Dhaka',
-          customer_post_code: '1212',
-          client_ip: '102.101.1.1'
-      }, function (checkout_url, resp_data) {
-          console.log('checkout url is ' + checkout_url);
-          console.log('Is token valid? ' + sp.token_valid());
-          sp.verify((resp_data) => {
-              console.log('verify');
-              console.dir(resp_data);
-          });
-          sp.check_status((resp_data) => {
-              console.log('check status');
-              console.dir(resp_data);
-          });
-      });
+    shurjopay(transaction_id){
+      let total_amount = this.getSubTotal+this.totalTax+this.totalShippingCost
+      let city = this.cityList.find(a=>a.id==this.form.city_id).name
+      let division = this.divisionList.find(a=>a.id==this.form.division_id).name
+      let country = this.countryList.find(a=>a.id==this.form.country_id).code
+      console.log('city',city,)
+      if (this.shipping_a_s_a_b_address){
+        this.form.s_first_name=this.form.first_name;
+        this.form.s_last_name=this.form.last_name;
+        this.form.s_email=this.form.email;
+        this.form.s_phone_number=this.form.phone_number;
+        this.form.s_address_l1=this.form.address_l1;
+        this.form.s_address_l2=this.form.address_l2;
+        this.form.s_country_id=this.form.country_id;
+        this.form.s_city_id=this.form.city_id;
+        this.form.s_division_id=this.form.division_id;
+        this.form.s_zip=this.form.zip;
+      }
+      window.location.replace(process.env.VUE_APP_API_BASE_URL+"shurjo?amount="+total_amount+"&user="+this.user_id+"&name="+this.form.first_name+" "+this.form.last_name+"&phone="+this.form.phone_number+"&email="+this.form.email+"&address="+this.form.address_l1+"&city="+city+"&division="+division+"&country="+country+"&order_id="+transaction_id+"&zip="+this.form.zip)
     },
     /*
     * method for ssl commerze open
@@ -752,12 +738,19 @@ export default {
       this.form.carts=this.carts;
       this.form.post('checkout')
           .then((response) => {
-            this.$toaster.success(response.data.message);
-            this.$router.push({name:'checkout.success'});
-            this.$store.commit(CLEAR_CART);
+            if (!this.is_cash_on_delivery) {
+              this.shurjopay(response.data.data.transaction_id)
+            }
+            else{
+              this.$toaster.success(response.data.message);
+              this.$router.push({name:'checkout.success'});
+              this.$store.commit(CLEAR_CART);
+            }
+            
           }).catch((error)=>{
-        if (error.response.status==422) this.$toaster.error(error.response.data.message);
-        else this.$toaster.error(error);
+            console.log(error)
+            if (error?.response?.status==422) this.$toaster.error(error.response.data?.message);
+            else this.$toaster.error(error);
       })
     },
   },

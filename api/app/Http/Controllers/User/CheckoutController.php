@@ -26,7 +26,7 @@ class CheckoutController extends Controller
             'carts.*.product'=>'required',
             'carts.*.discount_price'=>'required',
             'carts.*.price'=>'required',
-            'carts.*.flash_deal'=>'required',
+            'carts.*.flash_deal'=>'sometimes|nullable',
             'carts.*.quantity'=>'required',
         ])->validate();
         //return response()->json($request->all(),200);
@@ -74,7 +74,7 @@ class CheckoutController extends Controller
             Order::create($data1);
             $status +=1;
         }
-        if ($status>0) return response()->json(['status'=>'success','message'=>'Thank you for your order'],200);
+        if ($status>0) return response()->json(['status'=>'success','message'=>'Thank you for your order','data'=>$common_data],200);
         return response()->json($request,200);
     }
 }

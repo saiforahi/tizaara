@@ -32,7 +32,7 @@ const getters = {
     },
     getSubTotal(state){
         return state.carts.reduce((sum,item)=>{
-            return sum + (item.discount_price*item.quantity);
+            return sum + (item.price*item.quantity);
         },0)
     },
     getCartsById: state => id => state.area.find(value => value.id === id),

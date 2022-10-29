@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Address;
 use App\City;
+use App\Division;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -23,7 +24,7 @@ class CityController extends Controller
         $dir = $request->input('dir');
         $searchValue = $request->input('search');
         if ($length == null && $column == null && $dir == null && $searchValue == null) {
-            return DB::table('cities')->get();
+            return City::whereIn('division_id',Division::where('country_id',19)->get(['id'])->toArray())->get();
         }
         $query = City::with('division','division.country')->orderBy($columns[$column], $dir);
 

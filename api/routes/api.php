@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('/ipn', ['SslCommerzPaymentController@ipn']);
+
 Route::group(['middleware' => 'api', 'prefix' => 'admin', 'namespace' => 'Admin'], function ($router) {
     Route::post('login', 'AuthController@login');
     Route::post('register', 'AuthController@register');
@@ -39,6 +40,8 @@ Route::group(['middleware' => 'api', 'prefix' => 'admin', 'namespace' => 'Admin'
 });
 
 Route::group(['middleware' => 'api', 'prefix' => 'user', 'namespace' => 'User'], function ($router) {
+    Route::post('update-order-payment-status','PaymentController@update_order_payment_status');
+    // 
     Route::post('login', 'AuthController@login');
     Route::post('login-google', 'AuthController@loginByGoogle');
     Route::post('login-facebook', 'AuthController@loginByFacebook');

@@ -196,7 +196,7 @@ export default {
       ],
       payment_type:{
         0:'Cash On delivery',
-        1:'SSL Commerze',
+        1:'ShurjoPay',
       },
       status:{
         0:'Pending',

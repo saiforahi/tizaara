@@ -23,8 +23,22 @@
 </template>
 
 <script>
+import ApiService from '../../core/services/api.service';
 export default {
   name: "CheckoutSuccess",
+  created(){
+    let uri = window.location.search.substring(1); 
+    let params = new URLSearchParams(String(uri).replace('%3D','=').replace('%3F','&'));
+    console.log(params.get("transaction_id"));
+    console.log(params.get("order_id"));
+    if(params.get("order_id") && params.get("transaction_id")){
+      ApiService.post('user/update-order-payment-status',{transaction_id:params.get("transaction_id"),order_id:params.get("order_id")}).then(res=>{
+        console.log(res.data)
+      }).catch(err=>{
+        console.log(err)
+      })
+    }
+  }
 }
 </script>
 

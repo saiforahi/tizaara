@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\User\PaymentController;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Artisan;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,7 +13,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//To clear all cache
+Route::get('cc', function () {
+    Artisan::call('optimize:clear');
+    return "Cleared!";
+});
 Route::get('/', function () {
     return view('welcome');
 });
