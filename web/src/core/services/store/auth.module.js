@@ -53,8 +53,18 @@ const actions = {
         });
     },
     [LOGOUT](context) {
-        ApiService.post("user/logout");
-        context.commit(PURGE_AUTH);
+        // ApiService.post("user/logout");
+        // context.commit(PURGE_AUTH);
+        return new Promise(resolve => {
+            ApiService.post("user/logout", {})
+                .then(({data}) => {
+                    context.commit(PURGE_AUTH);
+                    resolve(data);
+                })
+                .catch(({response}) => {
+                    context.commit(SET_ERROR, response.data.errors);
+                });
+        });
     },
     [REGISTER](context, data) {
         return new Promise(resolve => {
