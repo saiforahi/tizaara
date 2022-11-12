@@ -525,7 +525,7 @@ import {mapGetters} from "vuex";
 import {DIVISION_LIST} from "../../core/services/store/module/division";
 import {api_base_url} from "../../core/config/app";
 import {CLEAR_CART} from "../../core/services/store/module/cart";
-import shurjopay from 'shurjopay'
+// import shurjopay from 'shurjopay'
 
 export default {
   name: "CheckOut",

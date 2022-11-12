@@ -3,7 +3,7 @@
     <div class="container" style="font-family: 'Noto Sans JP', sans-serif;">
       <div class="row m-0">
         <h3>{{ $t("message.cart.cart") }}</h3>
-        <div v-if="carts.length>0">
+        <div v-if="carts?.length>0">
           <!--Section: Block Content-->
           <section>
             <!--Grid row-->

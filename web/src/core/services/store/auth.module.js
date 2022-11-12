@@ -55,14 +55,21 @@ const actions = {
     [LOGOUT](context) {
         // ApiService.post("user/logout");
         // context.commit(PURGE_AUTH);
+        // ApiService.post("user/logout", {})
+        // .then(({data}) => {
+        //     context.commit(PURGE_AUTH);
+        //     resolve(data);
+        // })
+        // .catch(({response}) => {
+        //     context.commit(SET_ERROR, response.data.errors);
+        // });
         return new Promise(resolve => {
             ApiService.post("user/logout", {})
-                .then(({data}) => {
+                .then((res) => {
                     context.commit(PURGE_AUTH);
-                    resolve(data);
                 })
-                .catch(({response}) => {
-                    context.commit(SET_ERROR, response.data.errors);
+                .catch((err) => {
+                    // context.commit(SET_ERROR, response.data.errors);
                 });
         });
     },
