@@ -685,37 +685,7 @@ export default {
         this.form.s_division_id=this.form.division_id;
         this.form.s_zip=this.form.zip;
       }
-      window.location.replace(process.env.VUE_APP_API_BASE_URL+"shurjo?amount="+total_amount+"&user="+this.user_id+"&name="+this.form.first_name+" "+this.form.last_name+"&phone="+this.form.phone_number+"&email="+this.form.email+"&address="+this.form.address_l1+"&city="+city+"&division="+division+"&country="+country+"&order_id="+transaction_id+"&zip="+this.form.zip)
-    },
-    /*
-    * method for ssl commerze open
-    * */
-    sslCommerze(){
-
-      /*this.form2.post('pay-via-ajax').then((response)=>{
-        console.log(response.data);
-      }).catch((error)=>{
-        console.log(error);
-      })*/
-      if (this.shipping_a_s_a_b_address){
-        this.form.s_first_name=this.form.first_name;
-        this.form.s_last_name=this.form.last_name;
-        this.form.s_email=this.form.email;
-        this.form.s_phone_number=this.form.phone_number;
-        this.form.s_address_l1=this.form.address_l1;
-        this.form.s_address_l2=this.form.address_l2;
-        this.form.s_country_id=this.form.country_id;
-        this.form.s_city_id=this.form.city_id;
-        this.form.s_division_id=this.form.division_id;
-        this.form.s_zip=this.form.zip;
-      }
-      this.$v.form.$touch();
-      if (this.$v.form.$anyError) {
-        return;
-      }
-      this.form.carts=this.carts;
-      this.form.pay_amount=this.getSubTotal+this.totalTax+this.totalShippingCost;
-      window.sslczPayBtn( api_base_url+'pay-via-ajax',this.form);
+      window.location.replace(process.env.VUE_APP_API_BASE_URL+"shurjo?amount="+total_amount+"&user="+this.user_id+"&name="+this.form.first_name+" "+this.form.last_name+"&phone="+this.form.phone_number+"&email="+this.form.email+"&address="+this.form.address_l1+"&city="+city+"&division="+division+"&country="+country+"&order_id="+transaction_id+"&zip="+this.form.zip,"&value1="+transaction_id)
     },
     submit() {
       if (this.shipping_a_s_a_b_address){
