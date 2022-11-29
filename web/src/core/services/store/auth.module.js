@@ -63,14 +63,13 @@ const actions = {
         // .catch(({response}) => {
         //     context.commit(SET_ERROR, response.data.errors);
         // });
-        return new Promise(resolve => {
-            ApiService.post("user/logout", {})
-                .then((res) => {
-                    context.commit(PURGE_AUTH);
-                })
-                .catch((err) => {
-                    // context.commit(SET_ERROR, response.data.errors);
-                });
+        return ApiService.post("user/logout", {})
+        .then((res) => {
+            context.commit(PURGE_AUTH);
+            // resolve(res)
+        })
+        .catch((err) => {
+            // context.commit(SET_ERROR, response.data.errors);
         });
     },
     [REGISTER](context, data) {

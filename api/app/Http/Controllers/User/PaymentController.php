@@ -28,7 +28,7 @@ class PaymentController extends Controller
                 'customer_state' => $request->query('division'), 
                 'customer_postcode' => $request->query('zip'), 
                 'customer_country' => $request->query('country'),
-                'transaction_id'=> $request->query('order_id'),
+                'value1'=> $request->query('value1'),
             );
             $shurjopay_service = new ShurjopayController(); 
             return $shurjopay_service->checkout($info);
