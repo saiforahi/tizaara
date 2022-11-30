@@ -20,6 +20,12 @@
         <div slot="image" slot-scope="props">
           <img v-lazy="showImage(jsonDecode(props.row.product).thumbnail_img)" class="border" width="80px">
         </div>
+        <div slot="payment_status" slot-scope="props">
+          <template>
+            <span v-if="props.row.payment_status==1" class="badge badge-primary">Paid</span>
+            <span v-else class="badge badge-warning">Not Paid</span>
+          </template>
+        </div>
         <div slot="payment_type" slot-scope="props">
           <template v-if="props.payment_type ==1 && props.status ==='Pending'">
               <span style="color:red;">Rejected</span>
@@ -63,7 +69,7 @@ export default {
     return {
       moment,
       columns: ['serial', 'image', 'product_name', 'supplier.full_name', 'name', 'unit_price','offer_price','quantity',
-        'sub_total','shipping_charge','vat','total_amount','payment_type','created_at','approval_status','order_status', 'action'],
+        'sub_total','shipping_charge','vat','total_amount','payment_status','payment_type','created_at','approval_status','order_status', 'action'],
       options: {
         headings: {
           serial: '#',
@@ -78,6 +84,7 @@ export default {
           shipping_charge: 'shipping charge',
           vat: 'tax',
           total_amount: 'Total Amount',
+          payment_status: 'Payment Status',
           payment_type: 'Payment Type',
           create_at: 'Created At',
           approval_status: 'Approval Status',
@@ -88,7 +95,7 @@ export default {
       },
       payment_type:{
         0:'Cash On delivery',
-        1:'SSL Commerze',
+        1:'ShurjoPay',
       },
       status:{
         0:'Pending',

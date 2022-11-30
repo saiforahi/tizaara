@@ -29,10 +29,10 @@ export default {
   created(){
     let uri = window.location.search.substring(1); 
     let params = new URLSearchParams(String(uri).replace('%3D','=').replace('%3F','&'));
-    console.log(params.get("value1"));
+    // console.log(params.get("value1"));
     console.log(params.get("order_id"));
     if(params.get("order_id")){
-      ApiService.post('user/update-order-payment-status',{transaction_id:params.get("value1"),order_id:params.get("order_id")}).then(res=>{
+      ApiService.post('user/update-order-payment-status',{order_id:params.get("order_id")}).then(res=>{
         console.log(res.data)
       }).catch(err=>{
         console.log(err)

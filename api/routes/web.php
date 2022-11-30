@@ -22,3 +22,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/shurjo', [PaymentController::class,'shurjopay_checkout']);
+Route::get('/check/{id}', [PaymentController::class,'shurjopay_check']);

@@ -10,6 +10,10 @@ use shurjopayv2\ShurjopayLaravelPackage8\Http\Controllers\ShurjopayController;
 
 class PaymentController extends Controller
 {
+    public function shurjopay_check($id){
+        $shurjopay_service = new ShurjopayController(); 
+        return $shurjopay_service->verify($id);
+    }
     //
     public function shurjopay_checkout(Request $request){
         try{
@@ -41,15 +45,17 @@ class PaymentController extends Controller
     public function update_order_payment_status(Request $req){
         try{
             $req->validate([
-                'transaction_id'=>'required|exists:orders,transaction_id',
                 'order_id'=>'required|string'
             ]);
-            Order::where('transaction_id',$req->transaction_id)->update([
+            $shurjopay_service = new ShurjopayController(); 
+            $result= $shurjopay_service->verify($req->order_id);
+            $tz_order_id=json_decode($result,true)[0]['value1'];
+            Order::where('transaction_id',$tz_order_id)->update([
                 'shurjopay_order_id'=>$req->order_id,
                 'payment_status'=>true,
                 'payment_type'=>1,
             ]);
-            return response()->json(['success'=>true,'message'=>'Payment Status updated'],200);
+            return response()->json(['success'=>true,'message'=>'Payment Status updated','data'=>json_decode($result,true)[0]],200);
         }
         catch (Exception $e){
             return response()->json(['success'=>false,'error'=>$e->getMessage()],503);

@@ -685,7 +685,7 @@ export default {
         this.form.s_division_id=this.form.division_id;
         this.form.s_zip=this.form.zip;
       }
-      window.location.replace(process.env.VUE_APP_API_BASE_URL+"shurjo?amount="+total_amount+"&user="+this.user_id+"&name="+this.form.first_name+" "+this.form.last_name+"&phone="+this.form.phone_number+"&email="+this.form.email+"&address="+this.form.address_l1+"&city="+city+"&division="+division+"&country="+country+"&order_id="+transaction_id+"&zip="+this.form.zip,"&value1="+transaction_id)
+      window.location.replace(process.env.VUE_APP_API_BASE_URL+"shurjo?amount="+total_amount+"&user="+this.user_id+"&name="+this.form.first_name+" "+this.form.last_name+"&phone="+this.form.phone_number+"&email="+this.form.email+"&address="+this.form.address_l1+"&city="+city+"&division="+division+"&country="+country+"&order_id="+transaction_id+"&zip="+this.form.zip+"&value1="+transaction_id)
     },
     submit() {
       if (this.shipping_a_s_a_b_address){
