@@ -46,7 +46,7 @@
           <td>
             <CButtonGroup size="sm" class="mx-1">
               <template>
-                <CButton size="sm" v-if="project.status===0 || project.status===2" color="primary" @click="deletePackagePayment(project.id,1)">
+                <CButton size="sm" v-if="project.status===0" color="primary" @click="deletePackagePayment(project.id,1)">
                   verify
                 </CButton>
                 <CButton size="sm" v-if="project.status===1" color="danger" @click="deletePackagePayment(project.id,2)">
