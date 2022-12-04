@@ -83,8 +83,9 @@ class UserController extends Controller
     public function verify(VerifyRequest $verifyRequest, $status)
     {
         $verifyRequest->update(['status'=>$status]);
-        $ss= $verifyRequest->companyBasicInfo()->update(['is_verified'=>$status]);
-        if(isset($ss)) return response()->json(['status'=>'success','message'=>'successfully status change'],200);
-        else return response()->json(['status'=>'error','message'=>'Invalid request try again'],200);
+        return response()->json(['status'=>'success','message'=>'successfully status change'],200);
+        // $ss= $verifyRequest->companyBasicInfo()->update(['is_verified'=>$status]);
+        // if(isset($ss)) return response()->json(['status'=>'success','message'=>'successfully status change'],200);
+        // else return response()->json(['status'=>'error','message'=>'Invalid request try again'],200);
     }
 }

@@ -45,12 +45,12 @@
           </td>
           <td>
             <CButtonGroup size="sm" class="mx-1">
-              <template v-if="project.status===0">
-                <CButton color="primary" @click="deletePackagePayment(project.id,1)">
+              <template>
+                <CButton size="sm" v-if="project.status===0 || project.status===2" color="primary" @click="deletePackagePayment(project.id,1)">
                   verify
                 </CButton>
-                <CButton color="danger" @click="deletePackagePayment(project.id,2)">
-                  Declined
+                <CButton size="sm" v-if="project.status===1" color="danger" @click="deletePackagePayment(project.id,2)">
+                  Decline
                 </CButton>
               </template>
 
@@ -125,6 +125,7 @@ export default {
       this.tableData.draw++;
       ApiService.get(url, '', {params: this.tableData})
           .then((data) => {
+            console.log('pro',data.data)
             this.loadActive = false;
             let response = data.data;
             this.projects = response;
@@ -157,7 +158,7 @@ export default {
         confirmButtonText: 'Change'
       }).then((result) => {
         if (result.value) {
-          ApiService.post(`user/verify/request/status/change${id}/${status}`)
+          ApiService.post(`user/verify/request/status/change/${id}/${status}`)
               .then((response) => {
                 toast.fire({
                   icon: 'success',

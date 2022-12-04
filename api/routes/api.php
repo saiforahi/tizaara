@@ -74,7 +74,7 @@ Route::group(['middleware' => 'api', 'prefix' => 'user', 'namespace' => 'User'],
     Route::post('verification/request/store', 'UserController@verifyRequestStore');
 
     Route::get('all/verify/requests', 'UserController@verifyRequests');
-    Route::post('verify/request/status/change{verify_request}/{status}', 'UserController@verify');
+    Route::post('verify/request/status/change/{verify_request}/{status}', 'UserController@verify');
 });
 
 Route::group(['middleware' => 'api', 'namespace' => 'User'], function ($router) {
