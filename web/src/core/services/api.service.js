@@ -15,8 +15,8 @@ const ApiService = {
             return Promise.resolve(responce);
         }, error => {
             if (error.response.status === 401 && JwtService.getToken()) {
-                store.dispatch(LOGOUT);
-                router.push({name: "home"});
+                // store.dispatch(LOGOUT);
+                // router.push({name: "home"});
             }
             return Promise.reject(error);
         });

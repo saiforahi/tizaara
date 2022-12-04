@@ -63,8 +63,8 @@ const actions = {
         // .catch(({response}) => {
         //     context.commit(SET_ERROR, response.data.errors);
         // });
-        return ApiService.post("user/logout", {})
-        .then((res) => {
+        return ApiService.post("user/logout", {}).then((res) => {
+            JwtService.destroyToken()
             context.commit(PURGE_AUTH);
             // resolve(res)
         })
@@ -89,6 +89,7 @@ const actions = {
                     context.commit(SET_ERROR, response.data.errors);
                 });
         } else {
+            JwtService.destroyToken()
             context.commit(PURGE_AUTH);
         }
     },
@@ -122,7 +123,7 @@ const mutations = {
         state.isAuthenticated = false;
         state.user = {};
         state.errors = {};
-        JwtService.destroyToken();
+        // JwtService.destroyToken();
     }
 };
 
