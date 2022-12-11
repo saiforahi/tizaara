@@ -1,5 +1,8 @@
 <template>
-  <div class="product-list-wrapper" style="min-height: 80vh;display: flex;align-items: center;">
+  <div
+    class="product-list-wrapper"
+    style="min-height: 80vh; display: flex; align-items: center"
+  >
     <div class="container">
       <div v-if="isCheckout" id="checkout" class="row">
         <div class="col-md-12">
@@ -9,18 +12,18 @@
               <div class="payment-method">
                 <label for="card" class="method card">
                   <div class="card-logos">
-                    <img src="/images/visa_logo.png"/>
-                    <img src="/images/mastercard_logo.png"/>
+                    <img src="/images/visa_logo.png" />
+                    <img src="/images/mastercard_logo.png" />
                   </div>
                   <div class="radio-input">
-                    <input id="card" type="radio" name="payment">
+                    <input id="card" type="radio" name="payment" />
                     Pay with credit card
                   </div>
                 </label>
                 <label for="paypal" class="method paypal">
-                  <img src="/images/paypal_logo.png"/>
+                  <img src="/images/paypal_logo.png" />
                   <div class="radio-input">
-                    <input id="paypal" type="radio" name="payment">
+                    <input id="paypal" type="radio" name="payment" />
                     Pay with PayPal
                   </div>
                 </label>
@@ -28,50 +31,76 @@
               <div class="input-fields">
                 <div class="column-1">
                   <label for="cardholder">Cardholder's Name</label>
-                  <input type="text" id="cardholder"/>
+                  <input type="text" id="cardholder" />
                   <div class="small-inputs">
                     <div>
                       <label for="date">Valid thru</label>
-                      <input type="text" id="date" placeholder="MM / YY"/>
+                      <input type="text" id="date" placeholder="MM / YY" />
                     </div>
                     <div>
                       <label for="verification">CVV / CVC *</label>
-                      <input type="password" id="verification"/>
+                      <input type="password" id="verification" />
                     </div>
                   </div>
                 </div>
                 <div class="column-2">
                   <label for="cardnumber">Card Number</label>
-                  <input type="password" id="cardnumber"/>
-                  <span class="info">* CVV or CVC is the card security code, unique three digits number on the back of your card separate from its number.</span>
+                  <input type="password" id="cardnumber" />
+                  <span class="info"
+                    >* CVV or CVC is the card security code, unique three digits
+                    number on the back of your card separate from its
+                    number.</span
+                  >
                 </div>
               </div>
             </div>
             <div class="panel-footer">
-              <button class="btn back-btn" @click="isCheckout = false">Back</button>
-              <button class="btn next-btn" @click="handlePayment">Submit</button>
+              <button class="btn back-btn" @click="isCheckout = false">
+                Back
+              </button>
+              <button class="btn next-btn" @click="handlePayment">
+                Submit
+              </button>
             </div>
           </div>
         </div>
       </div>
       <div v-else class="row">
-        <div v-for="(data, k) in membershipPlans.data" :key="k" class="col-md-4 col-sm-6 plan-card">
-          <div :class="['pricingTable', {'blue': k == 1}, {'green': k == 2}]" class="w-100">
+        <div
+          v-for="(data, k) in membershipPlans.data"
+          :key="k"
+          class="col-md-4 col-sm-6 plan-card"
+        >
+          <div
+            :class="['pricingTable', { blue: k == 1 }, { green: k == 2 }]"
+            class="w-100"
+          >
             <div class="pricingTable-header">
               <h3 class="title">{{ data.name }}</h3>
               <h5 class="font-weight-bold">{{ data.amount }} BDT</h5>
               <div class="price-value">
                 <!--                <span class="amount">$10.99</span>-->
-                <span class="duration">{{ data.duration }} {{ $t("message.membership_plan.days") }}</span>
+                <span class="duration"
+                  >{{ data.duration }}
+                  {{ $t("message.membership_plan.days") }}</span
+                >
               </div>
             </div>
             <ul class="pricing-content w-50">
-              <li><b>{{ data.no_of_allowed_products }}</b> {{ $t("message.membership_plan.allowed_products") }}</li>
-              <li><b>{{ data.no_of_allowed_keywords }}</b> {{ $t("message.membership_plan.allowed_keywords") }}</li>
+              <li>
+                <b>{{ data.no_of_allowed_products }}</b>
+                {{ $t("message.membership_plan.allowed_products") }}
+              </li>
+              <li>
+                <b>{{ data.no_of_allowed_keywords }}</b>
+                {{ $t("message.membership_plan.allowed_keywords") }}
+              </li>
             </ul>
             <div class="w-75 mx-auto" v-html="data.benefit"></div>
             <div class="pricingTable-signup">
-              <a href="javascript:void(0)" @click="handleSignup(data)">{{ $t("message.membership_plan.sign_up") }}</a>
+              <a href="javascript:void(0)" @click="handleSignup(data)">{{
+                $t("message.membership_plan.sign_up")
+              }}</a>
             </div>
           </div>
         </div>
@@ -81,7 +110,7 @@
 </template>
 
 <script>
-import ApiService from '@/core/services/api.service'
+import ApiService from "@/core/services/api.service";
 
 export default {
   name: "About",
@@ -89,54 +118,60 @@ export default {
     return {
       loadActive: false,
       isCheckout: false,
-      membershipPlans: {}
-    }
+      membershipPlans: {},
+    };
   },
   created() {
-    this.loadData()
+    this.loadData();
   },
   methods: {
     loadData(page = 1) {
       this.loadActive = true;
       this.membershipPlans = {};
       ApiService.get(`membership-plan?page=${page}`)
-          .then(({data}) => {
-            this.membershipPlans = data;
-            this.loadActive = false;
-          })
-          .catch(() => {
-            this.loadActive = false;
-          });
+        .then(({ data }) => {
+          this.membershipPlans = data;
+          this.loadActive = false;
+        })
+        .catch(() => {
+          this.loadActive = false;
+        });
     },
     handleSignup(plan) {
-      this.choosePlan = plan
-      this.isCheckout = true
+      this.choosePlan = plan;
+      this.isCheckout = true;
     },
     handlePayment() {
-      ApiService.post('user/register-membership-plan/' + this.choosePlan.id)
-          .then((data) => {
-            if (data.data.result === 'Error') {
-              swal.fire("Failed!", data.data.message, 'warning')
-            } else {
-              swal.fire({
+      ApiService.post("user/register-membership-plan/" + this.choosePlan.id)
+        .then((data) => {
+          if (data.data.result === "Error") {
+            swal.fire("Failed!", data.data.message, "warning");
+          } else {
+            swal
+              .fire({
                 title: this.$t("message.common.register_successfully"),
-                icon: 'success',
+                icon: "success",
                 showCancelButton: false,
-                confirmButtonColor: '#3085d6',
-                confirmButtonText: 'Ok'
-              }).then((result) => {
-                if (result.value) {
-                  this.$router.push({name: "Dashboard"})
-                }
+                confirmButtonColor: "#3085d6",
+                confirmButtonText: "Ok",
               })
-            }
-          })
-          .catch(() => {
-            swal.fire(this.$t("message.common.error"), this.$t("message.common.something_wrong"), 'warning')
-          });
-    }
-  }
-}
+              .then((result) => {
+                if (result.value) {
+                  this.$router.push({ name: "Dashboard" });
+                }
+              });
+          }
+        })
+        .catch(() => {
+          swal.fire(
+            this.$t("message.common.error"),
+            this.$t("message.common.something_wrong"),
+            "warning"
+          );
+        });
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -145,7 +180,7 @@ export default {
 }
 
 .pricingTable {
-  font-family: 'Ubuntu', sans-serif;
+  font-family: "Ubuntu", sans-serif;
   text-align: center;
   position: relative;
   z-index: 1;
@@ -153,8 +188,8 @@ export default {
 
 .pricingTable:before,
 .pricingTable:after {
-  content: '';
-  background: linear-gradient(to right, #FE6D94, #F7BA81);
+  content: "";
+  background: linear-gradient(to right, #fe6d94, #f7ba81);
   height: calc(100% - 45px);
   width: 80%;
   border-radius: 0 0 200px 200px;
@@ -178,7 +213,7 @@ export default {
 
 .pricingTable .title {
   color: #fff;
-  background: linear-gradient(to right, #FE6D94, #F7BA81);
+  background: linear-gradient(to right, #fe6d94, #f7ba81);
   font-size: 33px;
   font-weight: 700;
   letter-spacing: 1px;
@@ -246,7 +281,7 @@ export default {
 
 .pricingTable .pricingTable-signup a {
   color: #fff;
-  background: linear-gradient(-135deg, #FE6D94, #F7BA81);
+  background: linear-gradient(-135deg, #fe6d94, #f7ba81);
   font-size: 22px;
   font-weight: 600;
   text-transform: capitalize;
@@ -268,20 +303,20 @@ export default {
 
 .pricingTable.blue:before,
 .pricingTable.blue .title {
-  background: linear-gradient(to right, #896BEF, #60CEE7);
+  background: linear-gradient(to right, #896bef, #60cee7);
 }
 
 .pricingTable.blue .pricingTable-signup a {
-  background: linear-gradient(-135deg, #896BEF, #60CEE7);
+  background: linear-gradient(-135deg, #896bef, #60cee7);
 }
 
 .pricingTable.green:before,
 .pricingTable.green .title {
-  background: linear-gradient(to right, #30CEBF, #47AA40);
+  background: linear-gradient(to right, #30cebf, #47aa40);
 }
 
 .pricingTable.green .pricingTable-signup a {
-  background: linear-gradient(-135deg, #30CEBF, #47AA40);
+  background: linear-gradient(-135deg, #30cebf, #47aa40);
 }
 
 @media only screen and (max-width: 990px) {

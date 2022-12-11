@@ -17,8 +17,7 @@
                     <div class="row mb-4" v-for="(cart,key) in carts" :key="key">
                       <div class="col-md-4 col-lg-3 col-xl-3">
                         <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
-                          <img class="img-fluid w-100"
-                               :src="imgShow(cart.product.thumbnail_img)" alt="">
+                          <img class="img-fluid w-100" :src="imgShow(cart.product.thumbnail_img)" alt="">
                         </div>
                       </div>
                       <div class="col-md-12 col-lg-12 col-xl-9">
@@ -39,7 +38,7 @@
                                     </button>
                                   </span>
                                   <input type="number" @change="qtyChange(key,cart.product,cart.available_product_qty)"
-                                         name="quantity" v-model.number="quantity=cart.quantity" min="1"
+                                         name="quantity" v-model.number="cart.quantity" min="1"
                                          class="form-control input-number">
                                   <span class="input-group-prepend">
                                     <button type="button"
@@ -101,8 +100,9 @@
                         </strong></span>
                       </li>
                     </ul>
-                    <button type="button" class="btn btn-primary btn-block">
-                      <router-link :to="{name:'cart.checkout'}">go to checkout</router-link>
+                    <button @click="$router.push({name:'cart.checkout'})" role="link" type="button" class="btn btn-primary btn-block">
+                      go to checkout
+                      <!-- <router-link :to="{name:'cart.checkout'}"></router-link> -->
                     </button>
                   </div>
                 </div>

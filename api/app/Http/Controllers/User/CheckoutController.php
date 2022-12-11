@@ -4,8 +4,10 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Order;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 
 class CheckoutController extends Controller
 {
@@ -20,7 +22,7 @@ class CheckoutController extends Controller
             'country_id'=>'required|not_in:0|exists:countries,id',
             'division_id'=>'required|not_in:0|exists:divisions,id',
             'city_id'=>'required|not_in:0|exists:cities,id',
-            'user_id'=>'required|not_in:0|exists:users,id',
+            'user_id'=>'sometimes|nullable|not_in:0|exists:users,id',
             'zip'=>'required|numeric',
             'carts.*'=>'required',
             'carts.*.product'=>'required',
@@ -29,6 +31,24 @@ class CheckoutController extends Controller
             'carts.*.flash_deal'=>'sometimes|nullable',
             'carts.*.quantity'=>'required',
         ])->validate();
+        $user_id=1;
+        if(User::where('email',$request->email)->exists()){
+            $user_id=User::where('email',$request->email)->first()->id;
+        }
+        else{
+            $user=User::create([
+               'account_type'=>2,
+               'username'=>$request->first_name.''.$request->first_name.'2',
+               'first_name'=>$request->first_name,
+               'last_name'=>$request->last_name,
+               'email'=>$request->email,
+               'mobile'=>$request->phone,
+               'password'=>Hash::make($request->password),
+               'is_verified'=>0,
+               'status'=>0,
+            ]);
+            $user_id=$user->id;
+        }
         //return response()->json($request->all(),200);
         $common_data =[
             'name'=>$request->s_first_name.' '.$request->s_last_name,
@@ -45,7 +65,7 @@ class CheckoutController extends Controller
             'transaction_id'=>uniqid(),
             'payment_type'=>0,
             'status'=>'success',
-            'buyer_id'=>$request->user_id,
+            'buyer_id'=>$user_id,
             'ip'=>$request->ip(),
             'browser'=>$request->userAgent(),
             'currency'=>'BDT'

@@ -633,10 +633,10 @@ export default {
     if(this.divisionList<1) this.$store.dispatch(DIVISION_LIST);
     if(this.cityList<1) this.$store.dispatch(CITY_LIST);
     this.form.user_id=this.user.id;
-    var script = document.createElement("script"), tag = document.getElementsByTagName("script")[0];
-    script.src = "https://sandbox.sslcommerz.com/sslcommerz-4.1.0.min.js?" + Math.random().toString(36).substring(7);
+    // var script = document.createElement("script"), tag = document.getElementsByTagName("script")[0];
+    // script.src = "https://sandbox.sslcommerz.com/sslcommerz-4.1.0.min.js?" + Math.random().toString(36).substring(7);
     // script.src = "https://seamless-epay.sslcommerz.com/sslcommerz-4.1.0.min.js?" + Math.random().toString(36).substring(7);
-    tag.parentNode.insertBefore(script, tag);
+    // tag.parentNode.insertBefore(script, tag);
   },
 
   computed: {
@@ -685,7 +685,7 @@ export default {
         this.form.s_division_id=this.form.division_id;
         this.form.s_zip=this.form.zip;
       }
-      window.location.replace(process.env.VUE_APP_API_BASE_URL+"shurjo?amount="+total_amount+"&user="+this.user_id+"&name="+this.form.first_name+" "+this.form.last_name+"&phone="+this.form.phone_number+"&email="+this.form.email+"&address="+this.form.address_l1+"&city="+city+"&division="+division+"&country="+country+"&order_id="+transaction_id+"&zip="+this.form.zip+"&value1="+transaction_id)
+      window.location.replace(process.env.VUE_APP_API_BASE_URL+"shurjo?amount="+total_amount+"&user="+this.user_id+"&name="+this.form.first_name+" "+this.form.last_name+"&phone="+this.form.phone_number+"&email="+this.form.email+"&address="+this.form.address_l1+"&city="+city+"&division="+division+"&country="+country+"&order_id="+transaction_id+"&zip="+this.form.zip+"&value1="+transaction_id+"&value2=shopping")
     },
     submit() {
       if (this.shipping_a_s_a_b_address){
