@@ -10,8 +10,7 @@
             <br><br> <h2 style="color:#0fad00">Success</h2>
             <h3>Dear, Customer</h3>
             <p style="font-size:20px;color:#5C5C5C;">
-              Your order is successfully completed. Thank you for shopping with us. You can see your transaction history
-              in your dashboard.
+              {{message}}
             </p>
             <a href="/" class="btn btn-success">     Home      </a>
             <br><br>
@@ -26,6 +25,11 @@
 import ApiService from '../../core/services/api.service';
 export default {
   name: "CheckoutSuccess",
+  data(){
+    return{
+      message:''
+    }
+  },
   created(){
     let uri = window.location.search.substring(1); 
     let params = new URLSearchParams(String(uri).replace('%3D','=').replace('%3F','&'));
@@ -34,6 +38,7 @@ export default {
     if(params.get("order_id")){
       ApiService.post('user/update-order-payment-status',{order_id:params.get("order_id")}).then(res=>{
         console.log(res.data)
+        this.message=res.data.message
       }).catch(err=>{
         console.log(err)
       })

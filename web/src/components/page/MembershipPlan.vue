@@ -4,8 +4,8 @@
     style="min-height: 80vh; display: flex; align-items: center"
   >
     <div class="container" style="font-family: 'Noto Sans JP', sans-serif">
-      <div v-if="isCheckout" id="checkout" class="row">
-        <MembershipSignUp/>
+      <div v-if="isCheckout" class="row">
+        <MembershipSignUp :plan="choosePlan"/>
       </div>
       <div v-else class="row">
         <div
@@ -54,6 +54,7 @@
 <script>
 import ApiService from "@/core/services/api.service";
 import MembershipSignUp from './MembershipSignUp.vue'
+import { mapGetters } from "vuex";
 export default {
   name: "About",
   components:{MembershipSignUp},
@@ -62,10 +63,21 @@ export default {
       loadActive: false,
       isCheckout: false,
       membershipPlans: {},
+      userAuth:false
     };
   },
   created() {
     this.loadData();
+  },
+  computed: {
+    ...mapGetters([
+      "isAuthenticated"
+    ]),
+  },
+  watch: {
+    user: function () {
+      this.userAuth = !!this.isAuthenticated;
+    }
   },
   methods: {
     loadData(page = 1) {
@@ -81,8 +93,19 @@ export default {
         });
     },
     handleSignup(plan) {
-      this.choosePlan = plan;
-      this.isCheckout = true;
+      if(this.isAuthenticated){
+        this.choosePlan = plan;
+        this.isCheckout = true;
+      }
+      else{
+        swal.fire({
+          title: "Please login first",
+          icon: "warning",
+          showCancelButton: false,
+          confirmButtonColor: "#3085d6",
+          confirmButtonText: "Ok",
+        })
+      }
     },
     handlePayment() {
       ApiService.post("user/register-membership-plan/" + this.choosePlan.id)

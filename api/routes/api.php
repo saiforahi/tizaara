@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\User\MembershipPlanController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -69,6 +70,7 @@ Route::group(['middleware' => 'api', 'prefix' => 'user', 'namespace' => 'User'],
     Route::get('chat/conversation/types', 'MessageController@chatConversationTypes');
 
     Route::post('register-membership-plan/{id}', 'MembershipPlanController@register');
+    Route::post('membership/plan/register', [MembershipPlanController::class,'registration']);
     Route::get('get/all/membership/plan', 'MembershipPlanController@getAll');
 
     Route::post('verification/request/store', 'UserController@verifyRequestStore');
@@ -320,3 +322,5 @@ Route::group(['middleware' => 'api'], function ($router) {
     Route::post('testimonial-status', 'TestimonialController@statusUpdate');
     Route::post('testimonial/update{testimonial}', 'TestimonialController@update');
 });
+
+

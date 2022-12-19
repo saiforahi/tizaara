@@ -7,12 +7,11 @@
           <b-form-group id="input-group-1" label-for="export_started_year">
             <label>{{ $t("message.checkout.first_name") }}</label>
             <b-input-group size="sm">
-              <b-input-group-prepend is-text>
-                <i class="fas fa-vote-yea"></i>
-              </b-input-group-prepend>
+                <b-input-group-prepend is-text>
+                            <i class="fas fa-vote-yea"></i>
+                          </b-input-group-prepend>
               <b-form-input
                 v-model="$v.form.first_name.$model"
-                type="text"
                 id="export_started_year"
                 size="sm"
                 :state="validateState('first_name')"
@@ -31,9 +30,9 @@
           <b-form-group id="input-group-1" label-for="export_started_year">
             <label>{{ $t("message.checkout.last_name") }}</label>
             <b-input-group size="sm">
-              <b-input-group-prepend is-text>
-                <i class="fas fa-vote-yea"></i>
-              </b-input-group-prepend>
+                <b-input-group-prepend is-text>
+                            <i class="fas fa-vote-yea"></i>
+                          </b-input-group-prepend>
               <b-form-input
                 v-model="$v.form.last_name.$model"
                 type="text"
@@ -52,12 +51,12 @@
           </b-form-group>
         </div>
         <div class="col-md-6 my-2">
-          <b-form-group id="input-group-1" label-for="export_started_year">
+          <b-form-group id="input-group-1" label-for="email">
             <label>{{ $t("message.checkout.email") }}</label>
             <b-input-group size="sm">
-              <b-input-group-prepend is-text>
-                <i class="fas fa-vote-yea"></i>
-              </b-input-group-prepend>
+                <b-input-group-prepend is-text>
+                            <i class="fas fa-vote-yea"></i>
+                          </b-input-group-prepend>
               <b-form-input
                 v-model="$v.form.email.$model"
                 type="email"
@@ -79,9 +78,9 @@
           <b-form-group id="input-group-1" label-for="export_started_year">
             <label>{{ $t("message.checkout.phone_number") }}</label>
             <b-input-group size="sm">
-              <b-input-group-prepend is-text>
-                <i class="fas fa-vote-yea"></i>
-              </b-input-group-prepend>
+                <b-input-group-prepend is-text>
+                            <i class="fas fa-vote-yea"></i>
+                          </b-input-group-prepend>
               <b-form-input
                 v-model="$v.form.phone_number.$model"
                 id="email"
@@ -105,8 +104,8 @@
             <label>{{ $t("message.checkout.address_l1") }}</label>
             <b-input-group size="sm">
               <b-input-group-prepend is-text>
-                <i class="fas fa-vote-yea"></i>
-              </b-input-group-prepend>
+                            <i class="fas fa-vote-yea"></i>
+                          </b-input-group-prepend>
               <b-form-input
                 v-model="$v.form.address_l1.$model"
                 id="email"
@@ -130,8 +129,8 @@
             <label>{{ $t("message.checkout.address_l2") }}</label>
             <b-input-group size="sm">
               <b-input-group-prepend is-text>
-                <i class="fas fa-vote-yea"></i>
-              </b-input-group-prepend>
+                            <i class="fas fa-vote-yea"></i>
+                          </b-input-group-prepend>
               <b-form-input
                 v-model="form.address_l2"
                 id="address_l2"
@@ -146,8 +145,8 @@
             <label>{{ $t("message.checkout.country") }}</label>
             <b-input-group size="sm">
               <b-input-group-prepend is-text>
-                <i class="fas fa-money-bill-alt"></i>
-              </b-input-group-prepend>
+                            <i class="fas fa-vote-yea"></i>
+                          </b-input-group-prepend>
               <b-form-select
                 :options="countryList"
                 @change="dropChange('country')"
@@ -174,8 +173,8 @@
             <label>{{ $t("message.checkout.division") }}</label>
             <b-input-group size="sm">
               <b-input-group-prepend is-text>
-                <i class="fas fa-money-bill-alt"></i>
-              </b-input-group-prepend>
+                            <i class="fas fa-vote-yea"></i>
+                          </b-input-group-prepend>
               <b-form-select
                 :options="getDivisionById(form.country_id)"
                 @change="dropChange('division')"
@@ -202,8 +201,8 @@
             <label>{{ $t("message.checkout.city") }}</label>
             <b-input-group size="sm">
               <b-input-group-prepend is-text>
-                <i class="fas fa-money-bill-alt"></i>
-              </b-input-group-prepend>
+                            <i class="fas fa-vote-yea"></i>
+                          </b-input-group-prepend>
               <b-form-select
                 :options="getCityById(form.division_id)"
                 v-model="$v.form.city_id.$model"
@@ -229,8 +228,8 @@
             <label>{{ $t("message.checkout.zip_code") }}</label>
             <b-input-group size="sm">
               <b-input-group-prepend is-text>
-                <i class="fas fa-vote-yea"></i>
-              </b-input-group-prepend>
+                            <i class="fas fa-vote-yea"></i>
+                          </b-input-group-prepend>
               <b-form-input
                 v-model.number="$v.form.zip.$model"
                 type="number"
@@ -247,6 +246,15 @@
         </div>
       </div>
       <hr class="mb-4" />
+      <button
+        
+        class="btn btn-primary btn-lg btn-block"
+        id="sslczPayBtn"
+        @click="payment"
+        type="button"
+        >
+        Continue
+        </button>
     </form>
   </div>
 </template>
@@ -258,9 +266,12 @@ import { CITY_LIST } from "../../core/services/store/module/city";
 import { mapGetters } from "vuex";
 import { DIVISION_LIST } from "../../core/services/store/module/division";
 import { api_base_url } from "../../core/config/app";
+import ApiService from "@/core/services/api.service";
+
 export default {
   name: "MembershipSignUp",
   mixins: [validationMixin],
+  props:['plan'],
   data() {
     return {
       shipping_a_s_a_b_address: false,
@@ -324,6 +335,7 @@ export default {
       "divisionList",
       "getCityById",
       "getDivisionById",
+      "user",
     ]),
   },
   methods: {
@@ -331,6 +343,74 @@ export default {
       const { $dirty, $error } = this.$v.form[name];
       return $dirty ? !$error : null;
     },
+    payment(){
+        let city = this.cityList.find((a) => a.id == this.form.city_id).name;
+        let division = this.divisionList.find(
+            (a) => a.id == this.form.division_id
+        ).name;
+        let country = this.countryList.find(
+            (a) => a.id == this.form.country_id
+        ).code;
+        
+        this.$v.form.$touch();
+        if (this.$v.form.$anyError) {
+            return;
+        }
+        ApiService.post("user/membership/plan/register",{user_id:this.user.id,plan_id:this.plan.id})
+        .then((data) => {
+          if (data.data.success === false) {
+            swal.fire("Failed!", data.data.message, "warning");
+          } else {
+            swal
+              .fire({
+                title: data.data.message,
+                icon: "success",
+                showCancelButton: false,
+                confirmButtonColor: "#3085d6",
+                confirmButtonText: "Ok",
+              })
+              .then((result) => {
+                window.location.replace(
+                    process.env.VUE_APP_API_BASE_URL +
+                    "shurjo?amount=" +
+                    this.plan.amount +
+                    "&user=" +
+                    this.user_id +
+                    "&name=" +
+                    this.form.first_name +
+                    " " +
+                    this.form.last_name +
+                    "&phone=" +
+                    this.form.phone_number +
+                    "&email=" +
+                    this.form.email +
+                    "&address=" +
+                    this.form.address_l1 +
+                    "&city=" +
+                    city +
+                    "&division=" +
+                    division +
+                    "&country=" +
+                    country +
+                    "&order_id=" +
+                    data.data.data.id +
+                    "&zip=" +
+                    this.form.zip +
+                    "&value1=" +
+                    data.data.data.id +
+                    "&value2=membership"
+                );
+              });
+          }
+        })
+        .catch(() => {
+          swal.fire(
+            this.$t("message.common.error"),
+            this.$t("message.common.something_wrong"),
+            "warning"
+          );
+        });
+    }
   },
   created() {
     if (this.countryList < 1) this.$store.dispatch(COUNTRY_LIST);
