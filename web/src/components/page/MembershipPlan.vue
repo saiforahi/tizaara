@@ -3,67 +3,9 @@
     class="product-list-wrapper"
     style="min-height: 80vh; display: flex; align-items: center"
   >
-    <div class="container">
+    <div class="container" style="font-family: 'Noto Sans JP', sans-serif">
       <div v-if="isCheckout" id="checkout" class="row">
-        <div class="col-md-12">
-          <div class="checkout-panel">
-            <div class="panel-body">
-              <h2 class="title">Checkout</h2>
-              <div class="payment-method">
-                <label for="card" class="method card">
-                  <div class="card-logos">
-                    <img src="/images/visa_logo.png" />
-                    <img src="/images/mastercard_logo.png" />
-                  </div>
-                  <div class="radio-input">
-                    <input id="card" type="radio" name="payment" />
-                    Pay with credit card
-                  </div>
-                </label>
-                <label for="paypal" class="method paypal">
-                  <img src="/images/paypal_logo.png" />
-                  <div class="radio-input">
-                    <input id="paypal" type="radio" name="payment" />
-                    Pay with PayPal
-                  </div>
-                </label>
-              </div>
-              <div class="input-fields">
-                <div class="column-1">
-                  <label for="cardholder">Cardholder's Name</label>
-                  <input type="text" id="cardholder" />
-                  <div class="small-inputs">
-                    <div>
-                      <label for="date">Valid thru</label>
-                      <input type="text" id="date" placeholder="MM / YY" />
-                    </div>
-                    <div>
-                      <label for="verification">CVV / CVC *</label>
-                      <input type="password" id="verification" />
-                    </div>
-                  </div>
-                </div>
-                <div class="column-2">
-                  <label for="cardnumber">Card Number</label>
-                  <input type="password" id="cardnumber" />
-                  <span class="info"
-                    >* CVV or CVC is the card security code, unique three digits
-                    number on the back of your card separate from its
-                    number.</span
-                  >
-                </div>
-              </div>
-            </div>
-            <div class="panel-footer">
-              <button class="btn back-btn" @click="isCheckout = false">
-                Back
-              </button>
-              <button class="btn next-btn" @click="handlePayment">
-                Submit
-              </button>
-            </div>
-          </div>
-        </div>
+        <MembershipSignUp/>
       </div>
       <div v-else class="row">
         <div
@@ -111,9 +53,10 @@
 
 <script>
 import ApiService from "@/core/services/api.service";
-
+import MembershipSignUp from './MembershipSignUp.vue'
 export default {
   name: "About",
+  components:{MembershipSignUp},
   data() {
     return {
       loadActive: false,
